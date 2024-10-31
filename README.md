@@ -5,6 +5,9 @@
 <br>
 
 # 日本語フォント追加版 InfiniTime
+通知に日本語フォントを表示できるようにしたInfiniTimeです。
+フォントファイルはライセンス上同梱できません。Noto Sans CJK JP Regularを用意し、InfiniTime/src/displayapp/fonts/の下に入れることでビルドできます。
+Dockerでコンパイルを試験し、通っています。ビルドスクリプトをDockerの外に出すための変更をしてあります。
 
 [![GitHub tag](https://img.shields.io/github/tag/InfiniTimeOrg/InfiniTime?include_prereleases=&sort=semver&color=blue)](https://github.com/InfiniTimeOrg/InfiniTime/releases)
 [![GitHub License](https://img.shields.io/github/license/InfiniTimeOrg/InfiniTime)](https://github.com/InfiniTimeOrg/InfiniLink/blob/main/LICENSE)
