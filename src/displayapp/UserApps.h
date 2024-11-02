@@ -3,9 +3,9 @@
 #include "Controllers.h"
 
 #include "displayapp/screens/Alarm.h"
-#include "displayapp/screens/Dice.h"
+//#include "displayapp/screens/Dice.h"
 #include "displayapp/screens/Timer.h"
-#include "displayapp/screens/Twos.h"
+//#include "displayapp/screens/Twos.h"
 #include "displayapp/screens/Tile.h"
 #include "displayapp/screens/ApplicationList.h"
 #include "displayapp/screens/WatchFaceDigital.h"
@@ -14,6 +14,7 @@
 #include "displayapp/screens/WatchFaceInfineat.h"
 #include "displayapp/screens/WatchFacePineTimeStyle.h"
 #include "displayapp/screens/WatchFaceTerminal.h"
+#include "displayapp/screens/Calendar.h"
 
 namespace Pinetime {
   namespace Applications {

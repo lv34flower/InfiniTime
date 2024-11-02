@@ -9,4 +9,4 @@ cmake -G "Unix Makefiles" \
     -DBUILD_DFU=1 \
     -DBUILD_RESOURCES=1 \
     -DENABLE_WATCHFACES="WatchFace::PineTimeStyle,WatchFace::Terminal" \
-    -DENABLE_USERAPPS="Apps::Alarm, Apps::Timer, Apps::Steps, Apps::HeartRate,Apps::Music, Apps::StopWatch"
+    -DENABLE_USERAPPS="Apps::Alarm, Apps::Timer, Apps::Steps, Apps::HeartRate,Apps::Music, Apps::StopWatch, Apps::Calendar"

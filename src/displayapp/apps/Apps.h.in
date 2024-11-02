@@ -18,16 +18,16 @@ namespace Pinetime {
       FlashLight,
       BatteryInfo,
       Music,
-      Paint,
-      Paddle,
-      Twos,
+      //Paint,
+      //Paddle,
+      //Twos,
       HeartRate,
       Navigation,
       StopWatch,
-      Metronome,
+      //Metronome,
       Motion,
       Steps,
-      Dice,
+      //Dice,
       Weather,
       PassKey,
       QuickSettings,
@@ -42,7 +42,8 @@ namespace Pinetime {
       SettingChimes,
       SettingShakeThreshold,
       SettingBluetooth,
-      Error
+      Error,
+      Calendar
     };
 
     enum class WatchFace : uint8_t {
