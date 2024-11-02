@@ -3,10 +3,8 @@
 
 using namespace Pinetime::Applications::Screens;
 
-Calendar::Calendar(DisplayApp* app,
-                   Controllers::DateTime& dateTimeController)
-  : app {app},
-  dateTimeController {dateTimeController} {
+Calendar::Calendar(Controllers::DateTime& dateTimeController)
+  : dateTimeController {dateTimeController} {
 
   struct colorPair {
     lv_color_t bg;
@@ -78,11 +76,9 @@ Calendar::~Calendar() {
 bool Calendar::OnTouchEvent(TouchEvents event) {
   switch (event) {
     case TouchEvents::SwipeLeft:
-      app->SetFullRefresh(DisplayApp::FullRefreshDirections::Left);
       ++month;
       break;
     case TouchEvents::SwipeRight:
-      app->SetFullRefresh(DisplayApp::FullRefreshDirections::Right);
       --month;
       break;
     case TouchEvents::SwipeUp:
@@ -141,41 +137,3 @@ void Calendar::Refresh() {
     }
   }
 }
-
-std::unique_ptr<Screen> Create() {
-
-  // title
-  lv_label_set_text_fmt(titleText, "%s %u", Controllers::DateTime::MonthShortToStringLow(static_cast<Controllers::DateTime::Months>(month)), year);
-  lv_obj_align(titleText, nullptr, LV_ALIGN_IN_TOP_MID, 0, 0);
-
-  // grid
-  uint8_t offset = getFirstWeekdayOfMonth(year, month);
-  uint8_t count = getDaysInMonth(year, month);
-  uint16_t toyear = dateTimeController.Year();
-  int8_t tomonth = static_cast<int>(dateTimeController.Month());
-  uint8_t today = dateTimeController.Day();
-
-  uint8_t print_day = 1;
-  for (uint8_t i = 0; i < nCols * (nRows - 1); ++i) {
-    uint8_t col = i % 7;
-    uint8_t row = i / 7 + 1;
-    if (i >= offset && print_day <= count) {
-      // print day
-      char buffer[7];
-      snprintf(buffer, sizeof(buffer), "%u", print_day);
-      lv_table_set_cell_value(gridDisplay, row, col, buffer);
-
-      if (toyear == year && tomonth == month && today == print_day) {
-        lv_table_set_cell_type(gridDisplay, row, col, 2);
-      } else {
-        lv_table_set_cell_type(gridDisplay, row, col, 1);
-      }
-
-      ++print_day;
-    } else {
-      lv_table_set_cell_value(gridDisplay, row, col, "");
-      lv_table_set_cell_type(gridDisplay, row, col, 1);
-    }
-  }
-}
-

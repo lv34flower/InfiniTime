@@ -4,7 +4,6 @@
 #include <cstdint>
 #include "Symbols.h"
 #include "displayapp/screens/Screen.h"
-#include "displayapp/apps/Apps.h"
 #include "displayapp/Controllers.h"
 #include "displayapp/DisplayApp.h"
 
@@ -13,16 +12,13 @@ namespace Pinetime {
     namespace Screens {
       class Calendar : public Screen {
       public:
-        Calendar(DisplayApp* app,
-                 Controllers::DateTime& dateTimeController);
+        Calendar(Controllers::DateTime& dateTimeController);
         ~Calendar() override;
 
         bool OnTouchEvent(TouchEvents event) override;
         //bool OnTouchEvent(uint16_t x, uint16_t y) override;
 
       private:
-
-        DisplayApp* app;
         Controllers::DateTime& dateTimeController;
 
         static constexpr uint8_t nColors = 4;
@@ -38,9 +34,6 @@ namespace Pinetime {
         uint16_t year;
 
         void Refresh();
-
-        std::unique_ptr<Screen> Create();
-        std::unique_ptr<Screen> current;
 
         static uint8_t getFirstWeekdayOfMonth(uint16_t year, uint8_t month) {
           if (month < 3) {
@@ -68,7 +61,7 @@ namespace Pinetime {
       static constexpr const char* icon = Screens::Symbols::calendar;
 
       static Screens::Screen* Create(AppControllers& controllers) {
-        return new Screens::Calendar(controllers.displayApp, controllers.dateTimeController);
+        return new Screens::Calendar(controllers.dateTimeController);
       }
     };
   }
