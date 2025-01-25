@@ -2,6 +2,7 @@
 
 #include <lvgl/lvgl.h>
 #include <cstdint>
+#include <unordered_set>
 #include "Symbols.h"
 #include "displayapp/screens/Screen.h"
 #include "displayapp/Controllers.h"
@@ -26,6 +27,10 @@ namespace Pinetime {
         static constexpr uint8_t nCols = 7;
         static constexpr uint8_t nRows = 7;
         static constexpr const char* dow[7] = {"SU", "MO", "TU", "WE", "TH", "FR", "SA"};
+
+        // holidays
+        static constexpr const char* hdir = "";
+
 
         lv_obj_t* gridDisplay;
         lv_obj_t* titleText;
