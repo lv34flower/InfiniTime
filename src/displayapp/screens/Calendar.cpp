@@ -3,8 +3,8 @@
 
 using namespace Pinetime::Applications::Screens;
 
-Calendar::Calendar(Controllers::DateTime& dateTimeController)
-  : dateTimeController {dateTimeController} {
+Calendar::Calendar(Controllers::DateTime& dateTimeController, Controllers::FS& fs)
+  : dateTimeController {dateTimeController}, fs {fs} {
 
   struct colorPair {
     lv_color_t bg;
@@ -16,6 +16,7 @@ Calendar::Calendar(Controllers::DateTime& dateTimeController)
     {LV_COLOR_GRAY, LV_COLOR_WHITE},  // Today
     {LV_COLOR_BLACK, LV_COLOR_BLUE},  // SAT header
     {LV_COLOR_BLACK, LV_COLOR_RED},   // SUN header | holiday
+    {LV_COLOR_GRAY, LV_COLOR_RED},    // Today & holiday
   };
 
   year = dateTimeController.Year();
@@ -66,6 +67,14 @@ Calendar::Calendar(Controllers::DateTime& dateTimeController)
   lv_label_set_align(titleText, LV_LABEL_ALIGN_CENTER);
   lv_obj_align(titleText, nullptr, LV_ALIGN_IN_TOP_MID, 0, 0);
 
+  // holiday info not exists text
+  holidayWarnText = lv_label_create(lv_scr_act(), nullptr);
+  lv_obj_set_width(holidayWarnText, LV_HOR_RES);
+  lv_label_set_align(holidayWarnText, LV_LABEL_ALIGN_CENTER);
+  lv_obj_align(holidayWarnText, nullptr, LV_ALIGN_IN_TOP_MID, 0, 20);
+  lv_obj_set_style_local_text_color(holidayWarnText, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_RED);
+
+  LoadHolidays();
   Refresh(); // date refresh
 }
 
@@ -74,6 +83,7 @@ Calendar::~Calendar() {
 }
 
 bool Calendar::OnTouchEvent(TouchEvents event) {
+  uint16_t currentYear = year;
   switch (event) {
     case TouchEvents::SwipeLeft:
       ++month;
@@ -98,6 +108,12 @@ bool Calendar::OnTouchEvent(TouchEvents event) {
     month = 1;
     ++year;
   }
+
+  if (year != currentYear) {
+    // reload holidays
+    LoadHolidays();
+  }
+
   Refresh();
   return true;
 }
@@ -106,6 +122,16 @@ void Calendar::Refresh() {
   // title
   lv_label_set_text_fmt(titleText, "%s %u", Controllers::DateTime::MonthShortToStringLow(static_cast<Controllers::DateTime::Months>(month)), year);
   lv_obj_align(titleText, nullptr, LV_ALIGN_IN_TOP_MID, 0, 0);
+
+  if (holidaysExists)
+  {
+    lv_label_set_text_fmt(holidayWarnText, "");
+  }
+  else
+  {
+    lv_label_set_text_fmt(holidayWarnText, "No holiday info");
+  }
+  lv_obj_align(holidayWarnText, nullptr, LV_ALIGN_IN_TOP_MID, 0, 20);
 
   // grid
   uint8_t offset = getFirstWeekdayOfMonth(year, month);
@@ -124,11 +150,19 @@ void Calendar::Refresh() {
       snprintf(buffer, sizeof(buffer), "%u", print_day);
       lv_table_set_cell_value(gridDisplay, row, col, buffer);
 
+      int th = 1;
       if (toyear == year && tomonth == month && today == print_day) {
-        lv_table_set_cell_type(gridDisplay, row, col, 2);
+        // lv_table_set_cell_type(gridDisplay, row, col, 2);
+        th += 1;
       } else {
-        lv_table_set_cell_type(gridDisplay, row, col, 1);
+        // lv_table_set_cell_type(gridDisplay, row, col, 1);
       }
+
+      if (holidaysExists && ((holidays[month - 1] & (0b1 << (print_day - 1))) != 0 ))
+      {
+        th += 3;
+      }
+      lv_table_set_cell_type(gridDisplay, row, col, th);
 
       ++print_day;
     } else {
@@ -136,4 +170,17 @@ void Calendar::Refresh() {
       lv_table_set_cell_type(gridDisplay, row, col, 1);
     }
   }
+}
+
+void Calendar::LoadHolidays() {
+  std::string fileName = hdir + std::to_string(year);
+  lfs_file_t hFile;
+  if (fs.FileOpen(&hFile, fileName.c_str(), LFS_O_RDONLY) != LFS_ERR_OK) {
+    holidaysExists = false;
+    return;
+  }
+  holidaysExists = true;
+
+  fs.FileRead(&hFile, reinterpret_cast<uint8_t*>(&holidays[0]), 48);
+  fs.FileClose(&hFile);
 }

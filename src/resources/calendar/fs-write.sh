@@ -2,6 +2,8 @@
 
 TARGET_DIR="./holidays"
 
+itctl fs mkdir $TARGET_DIR
+
 for file in "$TARGET_DIR"/*; do
   # ファイルならコマンドを実行
   if [ -f "$file" ]; then

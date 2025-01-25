@@ -2,7 +2,7 @@
 
 #include <lvgl/lvgl.h>
 #include <cstdint>
-#include <unordered_set>
+#include <string>
 #include "Symbols.h"
 #include "displayapp/screens/Screen.h"
 #include "displayapp/Controllers.h"
@@ -13,7 +13,7 @@ namespace Pinetime {
     namespace Screens {
       class Calendar : public Screen {
       public:
-        Calendar(Controllers::DateTime& dateTimeController);
+        Calendar(Controllers::DateTime& dateTimeController, Controllers::FS& fs);
         ~Calendar() override;
 
         bool OnTouchEvent(TouchEvents event) override;
@@ -21,19 +21,24 @@ namespace Pinetime {
 
       private:
         Controllers::DateTime& dateTimeController;
+        Controllers::FS& fs;
 
-        static constexpr uint8_t nColors = 4;
+        static constexpr uint8_t nColors = 5;
         lv_style_t cellStyles[nColors];
         static constexpr uint8_t nCols = 7;
         static constexpr uint8_t nRows = 7;
         static constexpr const char* dow[7] = {"SU", "MO", "TU", "WE", "TH", "FR", "SA"};
 
         // holidays
-        static constexpr const char* hdir = "";
-
+        const std::string hdir = "/holidays/";
+        uint32_t holidays[12];  // array=month bits=day
+        void LoadHolidays();
+        bool holidaysExists;
+        // holidays end
 
         lv_obj_t* gridDisplay;
         lv_obj_t* titleText;
+        lv_obj_t* holidayWarnText;
 
         int8_t month;
         uint16_t year;
@@ -66,7 +71,7 @@ namespace Pinetime {
       static constexpr const char* icon = Screens::Symbols::calendar;
 
       static Screens::Screen* Create(AppControllers& controllers) {
-        return new Screens::Calendar(controllers.dateTimeController);
+        return new Screens::Calendar(controllers.dateTimeController, controllers.filesystem);
       }
     };
   }

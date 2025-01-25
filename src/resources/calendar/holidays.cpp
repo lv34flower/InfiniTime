@@ -40,7 +40,7 @@ int main()
       }
     }
 
-    std::string outname = std::to_string(year) + std::string(".bin");
+    std::string outname = std::to_string(year);// + std::string(".bin");
     std::ofstream outputFile(outname.c_str(), std::ios::binary);
     if (!outputFile) {
       std::cerr << "File open error" << std::endl;
