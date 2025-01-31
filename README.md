@@ -12,13 +12,13 @@ Dockerでコンパイルを試験し、通っています。ビルドスクリ�
 # カレンダー機能 使い方
 src/resources/calendarディレクトリに各種コードがあります。
 
-holidays.py - holidays.jsonをC++コード用に変換
-↓
-holidays.cpp- 上記で変換したファイルをバイナリ形式に変換(年に応じてコードを変えてコンパイル)
-↓
-holidays/   - バイナリ形式の休日ファイルが格納されている
-↓
-fs-write.sh - バイナリ形式の休日ファイルをitdを通してファイルシステムに書き込む
+holidays.py - holidays.jsonをC++コード用に変換<br>
+↓<br>
+holidays.cpp- 上記で変換したファイルをバイナリ形式に変換(年に応じてコードを変えてコンパイル)<br>
+↓<br>
+holidays/   - バイナリ形式の休日ファイルが格納されている<br>
+↓<br>
+fs-write.sh - バイナリ形式の休日ファイルをitdを通してファイルシステムに書き込む<br>
 
 [![GitHub tag](https://img.shields.io/github/tag/InfiniTimeOrg/InfiniTime?include_prereleases=&sort=semver&color=blue)](https://github.com/InfiniTimeOrg/InfiniTime/releases)
 [![GitHub License](https://img.shields.io/github/license/InfiniTimeOrg/InfiniTime)](https://github.com/InfiniTimeOrg/InfiniLink/blob/main/LICENSE)
