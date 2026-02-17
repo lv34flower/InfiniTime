@@ -380,7 +380,7 @@ list(APPEND SOURCE_FILES
         # displayapp/screens/Metronome.cpp
         displayapp/screens/Motion.cpp
         displayapp/screens/Weather.cpp
-        displayapp/screens/Calculator.cpp
+        #displayapp/screens/Calculator.cpp
         displayapp/screens/FirmwareValidation.cpp
         displayapp/screens/ApplicationList.cpp
         displayapp/screens/Notifications.cpp
@@ -424,13 +424,13 @@ list(APPEND SOURCE_FILES
         displayapp/screens/settings/SettingOTA.cpp
 
         ## Watch faces
-        displayapp/screens/WatchFaceAnalog.cpp
+        #displayapp/screens/WatchFaceAnalog.cpp
         displayapp/screens/WatchFaceDigital.cpp
         # displayapp/screens/WatchFaceInfineat.cpp
-        displayapp/screens/WatchFaceTerminal.cpp
+        # displayapp/screens/WatchFaceTerminal.cpp
         displayapp/screens/WatchFacePineTimeStyle.cpp
         #displayapp/screens/WatchFaceCasioStyleG7710.cpp
-        displayapp/screens/WatchFacePrideFlag.cpp
+        #displayapp/screens/WatchFacePrideFlag.cpp
 
         ##
 

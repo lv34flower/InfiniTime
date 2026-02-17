@@ -8,5 +8,5 @@ cmake -G "Unix Makefiles" \
     -DNRF5_SDK_PATH="$TOOLS_DIR/$NRF_SDK_VER" \
     -DBUILD_DFU=1 \
     -DBUILD_RESOURCES=1 \
-    -DENABLE_WATCHFACES="WatchFace::PineTimeStyle,WatchFace::Terminal,WatchFace::Digital" \
+    -DENABLE_WATCHFACES="WatchFace::PineTimeStyle,WatchFace::Digital" \
     -DENABLE_USERAPPS="Apps::Timer, Apps::Alarm, Apps::StopWatch, Apps::Music, Apps::Calendar, Apps::Navigation, Apps::Weather, Apps::Steps, Apps::HeartRate"

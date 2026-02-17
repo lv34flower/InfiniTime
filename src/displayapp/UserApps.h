@@ -9,12 +9,12 @@
 #include "displayapp/screens/Tile.h"
 #include "displayapp/screens/ApplicationList.h"
 #include "displayapp/screens/WatchFaceDigital.h"
-#include "displayapp/screens/WatchFaceAnalog.h"
-#include "displayapp/screens/WatchFaceCasioStyleG7710.h"
-#include "displayapp/screens/WatchFaceInfineat.h"
+//#include "displayapp/screens/WatchFaceAnalog.h"
+//#include "displayapp/screens/WatchFaceCasioStyleG7710.h"
+//#include "displayapp/screens/WatchFaceInfineat.h"
 #include "displayapp/screens/WatchFacePineTimeStyle.h"
-#include "displayapp/screens/WatchFaceTerminal.h"
-#include "displayapp/screens/WatchFacePrideFlag.h"
+//#include "displayapp/screens/WatchFaceTerminal.h"
+//#include "displayapp/screens/WatchFacePrideFlag.h"
 #include "displayapp/screens/Calendar.h"
 
 namespace Pinetime {
