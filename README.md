@@ -9,6 +9,10 @@
 フォントファイルはライセンス上同梱できません。Noto Sans CJK JP Regularを用意し、InfiniTime/src/displayapp/fonts/の下に入れることでビルドできます。
 Dockerでコンパイルを試験し、通っています。ビルドスクリプトをDockerの外に出すための変更をしてあります。
 
+ビルドは以下のコマンドで
+sudo docker build -t infinitime-build ./docker
+sudo docker run --rm -it -v ${PWD}:/sources --user $(id -u):$(id -g) infinitime-build
+
 # カレンダー機能 使い方
 src/resources/calendarディレクトリに各種コードがあります。
 
