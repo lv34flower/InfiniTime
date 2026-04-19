@@ -257,7 +257,7 @@ void LittleVgl::SetNewTouchPoint(int16_t x, int16_t y, bool contact) {
 void LittleVgl::CancelTap() {
   if (tapped) {
     isCancelled = true;
-    touchPoint = {-1, -1};
+    tapped = false;
   }
 }
 
