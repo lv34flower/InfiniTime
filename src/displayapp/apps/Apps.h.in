@@ -46,7 +46,8 @@ namespace Pinetime {
       SettingBluetooth,
       SettingOTA,
       Error,
-      Calendar
+      Calendar,
+      ImageViewer
     };
 
     enum class WatchFace : uint8_t {
