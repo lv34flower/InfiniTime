@@ -441,7 +441,10 @@ void DisplayApp::Refresh() {
             LoadPreviousScreen();
           }
         } else {
-          lvgl.CancelTap();
+          if (gesture != TouchEvents::SwipeUp && gesture != TouchEvents::SwipeDown &&
+              gesture != TouchEvents::SwipeLeft && gesture != TouchEvents::SwipeRight) {
+            lvgl.CancelTap();
+          }
         }
       } break;
       case Messages::ButtonPushed:
